@@ -1,54 +1,50 @@
 // Prendi le Classi da Html
 
-const addTolist = document.querySelector('.add-to-list')
+const addToList = document.querySelector('.add-to-list')
 const aggiungi = document.querySelector('.aggiungi')
 const devList = document.querySelector('.dev-List')
 const removeDev = document.querySelector('.remove-dev')
-
-
-clickEvent();
 
 function clickEvent() {
   aggiungi.addEventListener('click', add);
   removeDev.addEventListener('click',cleanList);
   devList.addEventListener('click' , remove); 
 }
+clickEvent();
 
-// creare elemento 'li'
-// dare una classe a 'li'
-// il testo che verra' inserito si appendera al 'li'
-// creare un link 'a'
-// dare una classe al link
-// inserico una <i> per il tasto remove
-// appendere 'a' dentro 'li'
-// appendere 'li' dentro 'ul'
-// pulire la riga add to list  
+// Crea un elemento 'li'
+// Aggiungi una classe a 'li'
+// Crea un textNode che fa riferimento al valore inserito di addToList e appendilo a 'li'
+// Crea un link 'a'
+// Aggiungi una classe al link
+// Inserisco una <i> per il tasto X
+// Appendi 'a' dentro 'li'
+// Appendi 'li' dentro 'ul'
+// Pulisci la riga addToList 
 
-function add(e) {
+function add() {
   const li = document.createElement('li');
   li.className = 'list-item';
-  li.appendChild(document.createTextNode(addTolist.value));
+  li.appendChild(document.createTextNode(addToList.value));
   const link = document.createElement('a');
   link.className = 'delete-item';
   link.innerHTML = '<i> X</i>';
   li.appendChild(link); 
   devList.appendChild(li);
-  addTolist.value = '';
-  
-  // e.preventDefault();
+  addToList.value = '';
 }
 
 function cleanList() {
-  while (devList.firstChild) {
-    console.log(devList.firstChild)
-    devList.removeChild(devList.firstChild)
+  // console.log(devList.firstChild)
+  while (devList.firstChild) { // ul > li
+    devList.removeChild(devList.firstChild) // rimuove il primo list item 
   }
 }
 
 function remove(e) {
-  console.log(e.target)
-  if(e.target.parentElement.classList.contains('delete-item')) {
-    e.target.parentElement.parentElement.remove()
+  // console.log(e.target)
+  if(e.target.parentElement.classList.contains('delete-item')) { // prende l'elemento che ha come classe 'delete-item'
+    e.target.parentElement.parentElement.remove() // attraversa il DOM fino a rimuovere 'li'
   }
 }
 
